@@ -29,11 +29,8 @@ export function LeadCapture() {
 
     const onSubmit = async (data: FormData) => {
         try {
-            // Get URL from environment variables, fallback is used to prevent full crash if missing during build
-            const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL || "";
-
-            // Send data to n8n webhook
-            const response = await fetch(webhookUrl, {
+            // Enviar datos a nuestra nueva Serverless Function (Puente Seguro)
+            const response = await fetch("/api/lead", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
