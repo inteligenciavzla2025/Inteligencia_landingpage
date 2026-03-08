@@ -10,8 +10,8 @@ import { Button } from '../ui/Button';
 // Validation Schema
 const formSchema = z.object({
     name: z.string().min(2, "El nombre es muy corto"),
+    company: z.string().min(2, "Ingresa el nombre de tu empresa"),
     email: z.string().email("Email inválido"),
-    company: z.string().optional(),
     phone: z.string().min(8, "Número incompleto"),
 });
 
@@ -112,6 +112,16 @@ export function LeadCapture() {
                                             placeholder="Tu nombre"
                                         />
                                         {errors.name && <span className="text-red-500 text-xs mt-1">{errors.name.message}</span>}
+                                    </div>
+
+                                    <div>
+                                        <label className="text-sm font-medium text-gray-400 mb-1 block">Nombre de la Empresa</label>
+                                        <input
+                                            {...register("company")}
+                                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-electric-orange focus:ring-1 focus:ring-electric-orange outline-none transition-all placeholder:text-gray-600"
+                                            placeholder="Tu empresa"
+                                        />
+                                        {errors.company && <span className="text-red-500 text-xs mt-1">{errors.company.message}</span>}
                                     </div>
 
                                     <div>
