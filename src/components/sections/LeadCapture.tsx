@@ -115,7 +115,7 @@ export function LeadCapture() {
                                     </div>
 
                                     <div>
-                                        <label className="text-sm font-medium text-gray-400 mb-1 block">Nombre de la Empresa</label>
+                                        <label className="text-sm font-medium text-gray-400 mb-1 block">Nombre de la empresa</label>
                                         <input
                                             {...register("company")}
                                             className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-electric-orange focus:ring-1 focus:ring-electric-orange outline-none transition-all placeholder:text-gray-600"
