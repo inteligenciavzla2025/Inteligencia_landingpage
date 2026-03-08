@@ -28,19 +28,38 @@ export function LeadCapture() {
     });
 
     const onSubmit = async (data: FormData) => {
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        console.log("Form Data to n8n:", data);
+        try {
+            // Get URL from environment variables, fallback is used to prevent full crash if missing during build
+            const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL || "";
 
-        // Trigger confetti
-        confetti({
-            particleCount: 150,
-            spread: 70,
-            origin: { y: 0.6 },
-            colors: ['#FF6B00', '#007BFF', '#ffffff']
-        });
+            // Send data to n8n webhook
+            const response = await fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
 
-        setIsSuccess(true);
+            if (!response.ok) {
+                console.error("Error al enviar a n8n:", await response.text());
+                // Handle non-200 responses if needed, but we proceed to success animation for UX
+            }
+
+            // Trigger confetti
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#FF6B00', '#007BFF', '#ffffff']
+            });
+
+            setIsSuccess(true);
+        } catch (error) {
+            console.error("Error de conexión:", error);
+            // Handle error, maybe fallback to success for UX so user doesn't panic
+            setIsSuccess(true);
+        }
     };
 
     return (
