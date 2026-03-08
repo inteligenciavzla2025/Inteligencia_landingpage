@@ -90,7 +90,15 @@ export function Navbar() {
                                     {link.name}
                                 </a>
                             ))}
-                            <Button className="w-full">Agendar diagnóstico</Button>
+                            <Button
+                                className="w-full"
+                                onClick={() => {
+                                    setIsMobileMenuOpen(false);
+                                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                            >
+                                Agendar diagnóstico
+                            </Button>
                         </div>
                     </motion.div>
                 )}
