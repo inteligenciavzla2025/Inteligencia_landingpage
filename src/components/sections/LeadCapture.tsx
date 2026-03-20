@@ -104,10 +104,9 @@ export function LeadCapture() {
                                         <CheckCircle className="w-8 h-8 text-green-500" />
                                     </div>
                                     <h4 className="text-2xl font-bold text-white mb-2">¡Solicitud recibida!</h4>
-                                    <p className="text-gray-400 mb-6">
+                                    <p className="text-gray-400">
                                         Te hemos enviado un WhatsApp para coordinar el horario de la llamada.
                                     </p>
-                                    <Button variant="outline" onClick={() => setIsSuccess(false)}>Volver</Button>
                                 </motion.div>
                             ) : (
                                 <motion.form
