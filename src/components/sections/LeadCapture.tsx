@@ -167,8 +167,6 @@ export function LeadCapture() {
                                                             listItemCountryNameClassName: '!text-white/85',
                                                             listItemDialCodeClassName: '!text-white/35 !text-xs',
                                                             listItemSelectedClassName: '!bg-[#FF6B00]/10 !border-l-2 !border-[#FF6B00] hover:!bg-[#FF6B00]/15',
-                                                            searchClassName: '!bg-white/3 !border-b !border-white/8 !px-3 !py-2',
-                                                            searchInputClassName: '!bg-transparent !text-white !text-sm placeholder:!text-white/25 !outline-none',
                                                         }
                                                     }}
                                                     style={{
