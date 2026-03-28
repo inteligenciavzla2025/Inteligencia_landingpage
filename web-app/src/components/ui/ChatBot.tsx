@@ -62,17 +62,8 @@ export function ChatBot() {
             });
 
             const raw = await response.text();
-            let reply = 'Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.';
-            if (raw) {
-                try {
-                    const parsed = JSON.parse(raw);
-                    const data = Array.isArray(parsed) ? parsed[0] : parsed;
-                    reply = data?.reply || data?.message || data?.output || data?.text || data?.response || data?.answer || reply;
-                } catch {
-                    // n8n devolvió texto plano
-                    reply = raw;
-                }
-            }
+            const data = raw ? JSON.parse(raw) : {};
+            const reply = data.reply || data.message || data.output || data.text || 'Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.';
 
             setMessages(prev => [...prev, {
                 id: Date.now().toString() + '_bot',
