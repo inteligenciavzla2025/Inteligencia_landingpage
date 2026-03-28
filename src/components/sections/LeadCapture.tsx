@@ -1,19 +1,81 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, Loader2 } from 'lucide-react';
+import { CheckCircle, Loader2, ChevronDown } from 'lucide-react';
 import { GlassCard } from '../ui/GlassCard';
 import { Button } from '../ui/Button';
-import { PhoneInput, guessCountryByPartialPhoneNumber } from 'react-international-phone';
-import 'react-international-phone/style.css';
+
+const COUNTRIES = [
+    { dial: '+58',  flag: '🇻🇪', name: 'Venezuela' },
+    { dial: '+57',  flag: '🇨🇴', name: 'Colombia' },
+    { dial: '+52',  flag: '🇲🇽', name: 'México' },
+    { dial: '+1',   flag: '🇺🇸', name: 'EE.UU.' },
+    { dial: '+54',  flag: '🇦🇷', name: 'Argentina' },
+    { dial: '+51',  flag: '🇵🇪', name: 'Perú' },
+    { dial: '+56',  flag: '🇨🇱', name: 'Chile' },
+    { dial: '+593', flag: '🇪🇨', name: 'Ecuador' },
+    { dial: '+34',  flag: '🇪🇸', name: 'España' },
+    { dial: '+507', flag: '🇵🇦', name: 'Panamá' },
+];
+
+interface PhoneInputProps {
+    value: string;
+    onChange: (val: string) => void;
+    hasError: boolean;
+}
+
+function PhoneInputField({ value, onChange, hasError }: PhoneInputProps) {
+    const [dialCode, setDialCode] = useState('+58');
+    const localNumber = value.startsWith(dialCode) ? value.slice(dialCode.length) : value.replace(/^\+\d{1,4}/, '');
+
+    function handleDialChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        const newDial = e.target.value;
+        setDialCode(newDial);
+        onChange(newDial + localNumber);
+    }
+
+    function handleNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const num = e.target.value.replace(/[^\d\s\-()]/g, '');
+        onChange(dialCode + num);
+    }
+
+    const current = COUNTRIES.find(c => c.dial === dialCode);
+
+    return (
+        <div className={`flex w-full bg-white/5 border rounded-lg overflow-hidden transition-all focus-within:border-electric-orange focus-within:ring-1 focus-within:ring-electric-orange ${hasError ? 'border-red-500' : 'border-white/10'}`}>
+            <div className="relative flex items-center">
+                <select
+                    value={dialCode}
+                    onChange={handleDialChange}
+                    className="appearance-none bg-transparent text-white pl-3 pr-7 py-3 outline-none cursor-pointer text-sm border-r border-white/10 hover:bg-white/5 transition-colors"
+                >
+                    {COUNTRIES.map(c => (
+                        <option key={c.dial} value={c.dial} className="bg-black text-white">
+                            {c.flag} {c.dial}
+                        </option>
+                    ))}
+                </select>
+                <span className="absolute right-2 pointer-events-none text-gray-400">
+                    <ChevronDown size={12} />
+                </span>
+                <span className="absolute left-3 pointer-events-none text-base">{current?.flag}</span>
+            </div>
+            <input
+                type="tel"
+                value={localNumber}
+                onChange={handleNumberChange}
+                placeholder="Número de WhatsApp"
+                className="flex-1 bg-transparent text-white px-3 py-3 outline-none text-sm placeholder:text-gray-600"
+            />
+        </div>
+    );
+}
 
 function isValidWhatsAppNumber(phone: string): boolean {
-    if (!phone || phone.length < 7) return false;
-    const result = guessCountryByPartialPhoneNumber({ phone });
-    if (!result?.country) return false;
-    // Strip non-digits and check minimum length (dial code + at least 6 digits)
+    if (!phone) return false;
     const digits = phone.replace(/\D/g, '');
     return digits.length >= 8;
 }
@@ -146,33 +208,17 @@ export function LeadCapture() {
                                         {errors.email && <span className="text-red-500 text-xs mt-1">{errors.email.message}</span>}
                                     </div>
 
-                                    <div className="relative">
+                                    <div>
                                         <label className="text-sm font-medium text-gray-400 mb-1 block">Teléfono (WhatsApp)</label>
                                         <Controller
                                             name="phone"
                                             control={control}
                                             defaultValue=""
                                             render={({ field }) => (
-                                                <PhoneInput
-                                                    defaultCountry="ve"
+                                                <PhoneInputField
                                                     value={field.value}
                                                     onChange={field.onChange}
-                                                    inputClassName="!bg-transparent !text-white !border-0 !outline-none !text-base placeholder:!text-gray-600 !py-3 !px-4"
-                                                    countrySelectorStyleProps={{
-                                                        buttonClassName: '!bg-transparent !border-0 !border-r !border-white/10 !px-4 !py-3 hover:!bg-white/10 !transition-all',
-                                                        dropdownStyleProps: {
-                                                            className: '!bg-black/95 !backdrop-blur-xl !rounded-xl !shadow-[0_20px_50px_-10px_rgba(0,0,0,0.9)] !z-50',
-                                                            listItemClassName: '!text-white/85 hover:!bg-white/5 !transition-colors !duration-150',
-                                                            listItemCountryNameClassName: '!text-white/85',
-                                                            listItemDialCodeClassName: '!text-white/35 !text-xs',
-                                                            listItemSelectedClassName: '!bg-[#FF6B00]/10 !border-l-2 !border-[#FF6B00] hover:!bg-[#FF6B00]/15',
-                                                        }
-                                                    }}
-                                                    style={{
-                                                        '--react-international-phone-height': 'auto',
-                                                        '--react-international-phone-border-color': 'rgba(0, 123, 255, 0.25)',
-                                                    } as React.CSSProperties}
-                                                    className={`w-full bg-white/5 border rounded-lg text-white outline-none transition-all focus-within:border-electric-orange focus-within:ring-1 focus-within:ring-electric-orange ${errors.phone ? '!border-red-500' : 'border-white/10'}`}
+                                                    hasError={!!errors.phone}
                                                 />
                                             )}
                                         />
