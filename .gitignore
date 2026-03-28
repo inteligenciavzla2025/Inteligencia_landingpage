@@ -1,0 +1,30 @@
+# Herramientas de IA / editores locales
+.agent/
+.agents/
+.openclaude/
+.opencode/
+.windsurf/
+.claude/
+
+# Dependencias
+web-app/node_modules/
+
+# Build outputs
+web-app/dist/
+web-app/dist-ssr/
+
+# Vite cache
+web-app/.vite/
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
