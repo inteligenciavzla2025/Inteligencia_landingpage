@@ -1,0 +1,19 @@
+services:
+  landing:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - traefik_net
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.landing.rule=Host(`inteligencia.live`) || Host(`www.inteligencia.live`)
+      - traefik.http.routers.landing.tls=true
+      - traefik.http.routers.landing.entrypoints=websecure
+      - traefik.http.routers.landing.tls.certresolver=mytlschallenge
+      - traefik.http.services.landing.loadbalancer.server.port=3000
+
+networks:
+  traefik_net:
+    external: true
+    name: root_default
