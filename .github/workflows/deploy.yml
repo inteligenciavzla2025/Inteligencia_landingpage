@@ -19,9 +19,5 @@ jobs:
             set -e
             cd /var/www/inteligencia
             git pull origin main
-            npm ci --omit=dev
-            npm install --save-dev vite @vitejs/plugin-react typescript
-            npm run build
-            pm2 restart inteligencia-landing || pm2 start ecosystem.config.cjs
-            pm2 save
+            docker compose -f docker-compose.app.yml up -d --build
             echo "✅ Deploy completado"
