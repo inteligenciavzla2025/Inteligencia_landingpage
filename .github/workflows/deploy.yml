@@ -6,18 +6,13 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
-            set -e
-            cd /var/www/inteligencia
-            git pull origin main
-            docker compose -f docker-compose.app.yml up -d --build
-            echo "✅ Deploy completado"
+      - name: Deploy
+        run: |
+          set -e
+          cd /var/www/inteligencia
+          git pull origin main
+          docker compose -f docker-compose.app.yml up -d --build
+          echo "✅ Deploy completado"
