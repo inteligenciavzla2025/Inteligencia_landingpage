@@ -6,6 +6,7 @@ import { Services } from './components/sections/Services';
 import { Bridge } from './components/sections/Bridge';
 import { Process } from './components/sections/Process';
 import { LeadCapture } from './components/sections/LeadCapture';
+import { ChatBot } from './components/ui/ChatBot';
 
 function App() {
     return (
@@ -42,6 +43,7 @@ function App() {
                 </main>
 
                 <Footer />
+                <ChatBot />
             </div>
         </HelmetProvider>
     )
