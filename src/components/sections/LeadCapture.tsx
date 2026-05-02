@@ -118,6 +118,11 @@ export function LeadCapture() {
                 // Handle non-200 responses if needed, but we proceed to success animation for UX
             }
 
+            gtag('event', 'generate_lead', {
+                event_category: 'formulario',
+                event_label: 'diagnostico_express',
+            });
+
             // Trigger confetti
             confetti({
                 particleCount: 150,
