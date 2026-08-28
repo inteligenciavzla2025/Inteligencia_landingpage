@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '../../lib/utils';
 import { Menu, X } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { trackCtaClick } from '../../lib/analytics';
@@ -12,14 +13,50 @@ const navLinks = [
 
 export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+    // On mobile, a `fixed; left-0; right-0` element can size itself against
+    // the browser's layout viewport, which is sometimes wider than what's
+    // actually visible — causing real horizontal overflow. Pin the width
+    // explicitly to the true visible width instead of trusting auto-sizing.
+    const [navWidth, setNavWidth] = useState<number | null>(null);
 
     function handleFormClick(location: string) {
         trackCtaClick('navbar_form', location);
         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     }
 
+    useEffect(() => {
+        const heroEl = document.getElementById('hero');
+
+        function handleScroll() {
+            setNavWidth(window.visualViewport?.width ?? document.body.clientWidth);
+
+            if (!heroEl) {
+                setIsScrolled(window.scrollY > 50);
+                return;
+            }
+            setIsScrolled(heroEl.getBoundingClientRect().bottom <= 80);
+        }
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', handleScroll);
+        window.visualViewport?.addEventListener('resize', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleScroll);
+            window.visualViewport?.removeEventListener('resize', handleScroll);
+        };
+    }, []);
+
     return (
-        <nav className="fixed top-0 left-0 right-0 z-40 bg-transparent py-3">
+        <nav
+            style={navWidth ? { width: navWidth } : undefined}
+            className={cn(
+                "fixed top-0 left-0 right-0 z-40 py-3 transition-all duration-300",
+                isScrolled ? "bg-black/70 backdrop-blur-md border-b border-white/5" : "bg-transparent"
+            )}
+        >
             <div className="container mx-auto px-6 flex items-center justify-between">
                 <a href="#" className="flex items-center gap-2 group">
                     <img
@@ -72,21 +109,21 @@ export function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-black/95 border-b border-white/10 overflow-hidden"
+                        className="md:hidden bg-black/80 backdrop-blur-xl border-b border-white/10 overflow-hidden"
                     >
-                        <div className="px-6 py-8 flex flex-col gap-6">
+                        <div className="px-6 py-8 flex flex-col gap-3">
                             {navLinks.map((link) => (
                                 <a
                                     key={link.name}
                                     href={link.href}
-                                    className="text-lg font-medium text-gray-300 hover:text-white"
+                                    className="text-base font-medium px-4 py-3 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-gray-200 hover:text-white hover:bg-white/10 transition-colors"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {link.name}
                                 </a>
                             ))}
                             <Button
-                                className="w-full"
+                                className="w-full rounded-2xl bg-electric-orange/20 hover:bg-electric-orange/30 backdrop-blur-xl border border-electric-orange/40 text-white"
                                 onClick={() => {
                                     setIsMobileMenuOpen(false);
                                     handleFormClick('navbar_mobile');

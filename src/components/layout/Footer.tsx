@@ -19,7 +19,7 @@ export function Footer() {
         <footer className="bg-black border-t border-white/10 pt-20 pb-10">
             <div className="container mx-auto px-6">
                 <div className="grid md:grid-cols-4 gap-12 mb-16">
-                    <div className="col-span-2">
+                    <div className="md:col-span-2">
                         <a href="#" className="text-2xl font-bold tracking-tight text-white mb-6 block">
                             Inteligenc<span className="text-electric-orange">IA</span>
                         </a>
