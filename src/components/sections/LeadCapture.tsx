@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, Loader2, ChevronDown } from 'lucide-react';
 import { GlassCard } from '../ui/GlassCard';
 import { Button } from '../ui/Button';
+import { trackEvent } from '../../lib/analytics';
 
 const COUNTRIES = [
     { dial: '+58',  flag: '🇻🇪', name: 'Venezuela' },
@@ -118,7 +119,7 @@ export function LeadCapture() {
                 // Handle non-200 responses if needed, but we proceed to success animation for UX
             }
 
-            gtag('event', 'generate_lead', {
+            trackEvent('generate_lead', {
                 event_category: 'formulario',
                 event_label: 'diagnostico_express',
             });
@@ -141,11 +142,12 @@ export function LeadCapture() {
 
     return (
         <section id="contact" className="py-24 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-black to-black pointer-events-none" />
+            <div className="absolute inset-0 bg-black pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10">
                 <GlassCard className="max-w-4xl mx-auto p-0 grid md:grid-cols-2">
                     <div className="p-10 flex flex-col justify-center bg-white/5">
+                        <span className="text-sm text-gray-400 mb-3">¿Prefieres que te contactemos nosotros?</span>
                         <h3 className="text-3xl font-bold mb-6">Agenda tu <br /> <span className="text-electric-orange">Diagnóstico express</span></h3>
                         <p className="text-gray-400 mb-8">
                             Descubre en 15 minutos dónde está perdiendo dinero tu empresa y cómo la automatización puede solucionarlo.

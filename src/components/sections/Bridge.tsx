@@ -6,17 +6,16 @@ export function Bridge() {
     return (
         <section className="py-24 relative">
             <div className="container mx-auto px-6">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="grid md:grid-cols-2 gap-20 items-stretch max-w-4xl mx-auto relative">
                     {/* Before State */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="order-2 md:order-1"
+                        className="order-2 md:order-1 h-full"
                     >
-                        <GlassCard className="border-red-500/20 bg-red-500/5 relative overflow-hidden">
-                            <div className="absolute -right-10 -top-10 w-40 h-40 bg-red-500/10 rounded-full blur-3xl pointer-events-none" />
+                        <GlassCard className="h-full border-red-500/20 bg-red-500/5 relative overflow-hidden">
                             <h3 className="text-2xl font-bold mb-6 text-red-100 flex items-center gap-3">
                                 <XCircle className="text-red-500" />
                                 El caos actual
@@ -38,7 +37,7 @@ export function Bridge() {
                     </motion.div>
 
                     {/* Transformation Arrow (Mobile only, or center layout for desktop if redesigned) */}
-                    <div className="hidden md:flex justify-center order-1 md:order-2 absolute left-1/2 -translate-x-1/2 z-10">
+                    <div className="hidden md:flex justify-center order-1 md:order-2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
                         <div className="w-12 h-12 rounded-full bg-black border border-white/20 flex items-center justify-center">
                             <ArrowRight className="text-white" />
                         </div>
@@ -50,10 +49,9 @@ export function Bridge() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="order-1 md:order-3"
+                        className="order-1 md:order-3 h-full"
                     >
-                        <GlassCard className="border-electric-orange/30 bg-electric-orange/5 relative overflow-hidden">
-                            <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-electric-orange/10 rounded-full blur-3xl pointer-events-none" />
+                        <GlassCard className="h-full border-electric-orange/30 bg-electric-orange/5 relative overflow-hidden">
                             <h3 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
                                 <CheckCircle className="text-electric-orange" />
                                 Modo InteligencIA

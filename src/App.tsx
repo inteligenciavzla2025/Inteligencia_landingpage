@@ -6,16 +6,21 @@ import { Services } from './components/sections/Services';
 import { Bridge } from './components/sections/Bridge';
 import { Process } from './components/sections/Process';
 import { LeadCapture } from './components/sections/LeadCapture';
-import { ChatBot } from './components/ui/ChatBot';
+import { ChatModal } from './components/ui/ChatModal';
+import { StickyPromptBar } from './components/ui/StickyPromptBar';
+import { ChatProvider } from './context/ChatContext';
+import { useScrollDepth } from './hooks/useScrollDepth';
 
 function App() {
+    useScrollDepth();
+
     return (
         <HelmetProvider>
             <div className="bg-black min-h-screen text-white selection:bg-electric-orange/30">
                 <Helmet>
                     <title>InteligencIA</title>
                     <meta name="description" content="Cosechamos tiempo y escalamos tus ventas eliminando procesos manuales con IA. Desarrollo de software crítico, chatbots inteligentes y consultoría estratégica." />
-                    <meta name="theme-color" content="#000000" />
+                    <meta name="theme-color" content="#020202" />
 
                     {/* Open Graph / Facebook */}
                     <meta property="og:type" content="website" />
@@ -32,18 +37,21 @@ function App() {
                     <meta property="twitter:image" content="https://inteligencia.la/og-image.jpg" />
                 </Helmet>
 
-                <Navbar />
+                <ChatProvider>
+                    <Navbar />
 
-                <main>
-                    <Hero />
-                    <Services />
-                    <Bridge />
-                    <Process />
-                    <LeadCapture />
-                </main>
+                    <main>
+                        <Hero />
+                        <Services />
+                        <Bridge />
+                        <Process />
+                        <LeadCapture />
+                    </main>
 
-                <Footer />
-                <ChatBot />
+                    <Footer />
+                    <ChatModal />
+                    <StickyPromptBar />
+                </ChatProvider>
             </div>
         </HelmetProvider>
     )

@@ -1,52 +1,43 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { cn } from '../../lib/utils';
+import { trackCtaClick } from '../../lib/analytics';
+
+const navLinks = [
+    { name: 'Soluciones', href: '#services' },
+    { name: 'Proceso', href: '#process' },
+    { name: 'Nosotros', href: '#about' },
+];
 
 export function Navbar() {
-    const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    const navLinks = [
-        { name: 'Soluciones', href: '#services' },
-        { name: 'Proceso', href: '#process' },
-        { name: 'Nosotros', href: '#about' },
-    ];
+    function handleFormClick(location: string) {
+        trackCtaClick('navbar_form', location);
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
 
     return (
-        <nav
-            className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-                isScrolled ? "bg-black/50 backdrop-blur-md py-4 border-b border-white/5" : "bg-transparent py-6"
-            )}
-        >
+        <nav className="fixed top-0 left-0 right-0 z-40 bg-transparent py-3">
             <div className="container mx-auto px-6 flex items-center justify-between">
-                <a href="#" className="flex items-center gap-3 group">
+                <a href="#" className="flex items-center gap-2 group">
                     <img
                         src="/logo_header.png"
                         alt="InteligencIA Logo"
-                        className="w-14 h-14 object-contain drop-shadow-[0_0_8px_rgba(0,123,255,0.3)] group-hover:drop-shadow-[0_0_15px_rgba(255,107,0,0.5)] transition-all duration-300"
+                        className="w-9 h-9 object-contain drop-shadow-[0_0_8px_rgba(0,123,255,0.3)] group-hover:drop-shadow-[0_0_15px_rgba(255,107,0,0.5)] transition-all duration-300"
                     />
-                    <span className="text-2xl font-display font-bold tracking-tight text-white">Inteligenc<span className="text-tech-blue">IA</span></span>
+                    <span className="text-lg font-display font-bold tracking-tight text-white">Inteligenc<span className="text-tech-blue">IA</span></span>
                 </a>
 
                 {/* Desktop Nav */}
-                <div className="hidden md:flex items-center gap-8">
-                    <div className="flex items-center gap-6">
+                <div className="hidden md:flex items-center gap-4">
+                    <div className="flex items-center gap-0.5">
                         {navLinks.map((link) => (
                             <a
                                 key={link.name}
                                 href={link.href}
-                                className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                                className="text-sm font-medium px-2.5 py-1.5 rounded-full border border-transparent text-gray-300 transition-all duration-300 hover:text-white hover:bg-white/5 hover:backdrop-blur-xl hover:border-white/10"
                                 onClick={(e) => {
                                     e.preventDefault();
                                     document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
@@ -56,7 +47,11 @@ export function Navbar() {
                             </a>
                         ))}
                     </div>
-                    <Button size="sm" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+                    <Button
+                        size="sm"
+                        onClick={() => handleFormClick('navbar')}
+                        className="rounded-2xl bg-electric-orange/20 hover:bg-electric-orange/30 backdrop-blur-xl border border-electric-orange/40 text-white"
+                    >
                         Agendar diagnóstico
                     </Button>
                 </div>
@@ -94,7 +89,7 @@ export function Navbar() {
                                 className="w-full"
                                 onClick={() => {
                                     setIsMobileMenuOpen(false);
-                                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                                    handleFormClick('navbar_mobile');
                                 }}
                             >
                                 Agendar diagnóstico

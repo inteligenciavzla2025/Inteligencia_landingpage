@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  background-color: #000000;
+  background-color: #020202;
   color: #ffffff;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
-  background-color: #000000;
+  background-color: #020202;
 }
 
 h1,
@@ -23,10 +23,10 @@ h6 {
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-card-hover {
@@ -34,72 +34,39 @@ h6 {
 }
 
 .glass-card-hover:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(0, 123, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px -10px rgba(0, 123, 255, 0.2);
 }
 
-.text-gradient {
-  background: linear-gradient(to right, #ffffff, #999999);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-blue {
-  background: linear-gradient(to right, #007BFF, #00C6FF);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Custom Scrollbar for a premium feel */
+/* Custom Scrollbar — same treatment as the chat scroll */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  background: transparent;
+  border-left: none;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-  border: 3px solid #050505;
-  /* Creates padding effect */
+  background: #3a3a3e;
+  border-radius: 4px;
+  border: none;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF6B00;
-  /* electric-orange */
+  background: #4a4a4f;
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.15) #050505;
-}
-
-/* Chat textarea scrollbar */
-.chat-input::-webkit-scrollbar {
-  width: 4px;
-}
-
-.chat-input::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.chat-input::-webkit-scrollbar-thumb {
-  background: rgba(255, 107, 0, 0.4);
-  border-radius: 4px;
-  border: none;
-}
-
-.chat-input::-webkit-scrollbar-thumb:hover {
-  background: #FF6B00;
-}
-
-.chat-input {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 107, 0, 0.4) transparent;
+  scrollbar-color: #3a3a3e transparent;
 }

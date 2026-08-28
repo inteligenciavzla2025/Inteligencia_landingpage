@@ -1,78 +1,98 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Bot, Zap, Code, BarChart } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { ArrowUp, MessageCircle, Settings, Building2, LineChart } from 'lucide-react';
+import { useChatContext } from '../../context/ChatContext';
+import { trackCtaClick } from '../../lib/analytics';
+
+const QUICK_ACTIONS = [
+    { icon: MessageCircle, label: 'Automatizar WhatsApp', prompt: 'Quiero automatizar la atención de WhatsApp de mi negocio' },
+    { icon: Settings, label: 'Automatizar procesos', prompt: '¿Cómo automatizan procesos con n8n o Make?' },
+    { icon: Building2, label: '¿Es para mi pyme?', prompt: 'Tengo una pyme, ¿esto es para mí?' },
+    { icon: LineChart, label: 'Ver resultados', prompt: '¿Qué resultados generan para otros clientes?' },
+];
 
 export function Hero() {
+    const [heroQuery, setHeroQuery] = useState('');
+    const { openChat } = useChatContext();
+
+    function handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        const text = heroQuery.trim();
+        if (!text) return;
+        trackCtaClick('hero_chat', 'hero');
+        openChat('hero_input', text);
+        setHeroQuery('');
+    }
+
+    function handleQuickAction(label: string, prompt: string) {
+        trackCtaClick(`hero_quick_${label}`, 'hero');
+        openChat('hero_quick_action', prompt);
+    }
+
+    function handleFormLinkClick() {
+        trackCtaClick('hero_form', 'hero');
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
+
     return (
-        <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-            {/* Background Elements */}
-            <div className="absolute inset-0 bg-hero-gradient opacity-40 pointer-events-none" />
-            <div className="absolute top-1/4 -left-20 w-96 h-96 bg-electric-orange/10 rounded-full blur-[100px] animate-pulse" />
-            <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-tech-blue/10 rounded-full blur-[100px] animate-pulse delay-1000" />
+        <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover z-0"
+            >
+                <source src="/video/hero-brain.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black via-black/40 to-black/10 pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10 text-center">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-sm"
+                    className="max-w-2xl mx-auto"
                 >
-                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-sm font-medium text-gray-300">Disponible para nuevos proyectos</span>
-                </motion.div>
+                    <form onSubmit={handleSubmit} className="relative flex items-center bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl pl-5 pr-3 py-3 shadow-2xl shadow-black/40">
+                        <input
+                            type="text"
+                            value={heroQuery}
+                            onChange={e => setHeroQuery(e.target.value)}
+                            placeholder="Pregúntale a CEREBRO sobre tu negocio..."
+                            className="flex-1 bg-transparent text-white placeholder-gray-500 outline-none text-base md:text-lg"
+                        />
+                        <button
+                            type="submit"
+                            disabled={!heroQuery.trim()}
+                            aria-label="Enviar"
+                            className="w-10 h-10 rounded-full bg-electric-orange hover:bg-orange-600 flex items-center justify-center transition-colors disabled:opacity-40 disabled:cursor-default flex-shrink-0"
+                        >
+                            <ArrowUp className="w-5 h-5 text-white" />
+                        </button>
+                    </form>
 
-                <motion.h1
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
-                    className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-tight"
-                >
-                    Tu negocio en <span className="text-gradient-blue">modo inteligente</span>
-                    <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500 text-4xl md:text-6xl mt-2 block">
-                        Automatización y software a medida
-                    </span>
-                </motion.h1>
+                    <div className="flex flex-wrap items-center justify-center gap-2 mt-5">
+                        {QUICK_ACTIONS.map(action => (
+                            <button
+                                key={action.label}
+                                type="button"
+                                onClick={() => handleQuickAction(action.label, action.prompt)}
+                                className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-xs font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-colors"
+                            >
+                                <action.icon className="w-3.5 h-3.5" />
+                                {action.label}
+                            </button>
+                        ))}
+                    </div>
 
-                <motion.p
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed"
-                >
-                    Tu operación en piloto automático. IA para eliminar procesos manuales y escalar ventas de forma exponencial.
-                </motion.p>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="flex flex-col sm:flex-row items-center justify-center gap-6"
-                >
-                    <Button size="lg" className="w-full sm:w-auto group" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
-                        Activar piloto automático
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                </motion.div>
-
-                {/* Feature Grid Mini */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
-                >
-                    {[
-                        { icon: Zap, label: "Automatización" },
-                        { icon: Code, label: "Desarrollo" },
-                        { icon: Bot, label: "Agentes IA" },
-                        { icon: BarChart, label: "Estrategia" }
-                    ].map((item, i) => (
-                        <div key={i} className="flex flex-col items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                            <item.icon className="text-electric-orange w-6 h-6" />
-                            <span className="font-medium text-gray-300">{item.label}</span>
-                        </div>
-                    ))}
+                    <button
+                        type="button"
+                        onClick={handleFormLinkClick}
+                        className="mt-5 text-sm text-gray-400 hover:text-white transition-colors underline underline-offset-4 decoration-white/20"
+                    >
+                        o agenda tu diagnóstico directamente
+                    </button>
                 </motion.div>
             </div>
         </section>

@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion';
+import { Calendar } from 'lucide-react';
+import { Button } from '../ui/Button';
+import { trackCtaClick } from '../../lib/analytics';
 
 const steps = [
     {
@@ -24,6 +27,11 @@ const steps = [
 ];
 
 export function Process() {
+    function handleFormClick() {
+        trackCtaClick('process_form', 'process');
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
+
     return (
         <section id="process" className="py-24 bg-black/50">
             <div className="container mx-auto px-6">
@@ -48,12 +56,11 @@ export function Process() {
                             className="relative flex flex-col items-center text-center"
                         >
                             <div className="mb-6 relative flex flex-col items-center w-full">
-                                <span className="text-6xl font-black text-white/5 absolute -top-4 left-1/2 -translate-x-1/2 select-none z-0">
+                                <div className="w-12 h-12 rounded-full border-2 border-electric-orange bg-black flex items-center justify-center relative z-10 font-bold text-electric-orange">
                                     {step.number}
-                                </span>
-                                <div className="w-4 h-4 rounded-full bg-electric-orange relative z-10 mb-6" />
+                                </div>
                                 {index !== steps.length - 1 && (
-                                    <div className="hidden md:block absolute top-2 left-1/2 w-full h-[1px] bg-gradient-to-r from-electric-orange to-transparent opacity-30" />
+                                    <div className="hidden md:block absolute top-6 left-1/2 w-full h-[1px] bg-white/10" />
                                 )}
                             </div>
 
@@ -62,6 +69,18 @@ export function Process() {
                         </motion.div>
                     ))}
                 </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="mt-16 flex items-center justify-center"
+                >
+                    <Button onClick={handleFormClick}>
+                        <Calendar className="w-4 h-4" /> Agendar diagnóstico
+                    </Button>
+                </motion.div>
             </div>
         </section>
     );
