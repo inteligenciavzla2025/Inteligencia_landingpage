@@ -64,7 +64,7 @@ export function ImageComparison({
     return (
         <div
             ref={containerRef}
-            className="relative w-full aspect-video max-w-4xl mx-auto select-none rounded-2xl overflow-hidden border border-white/10"
+            className="relative w-full aspect-[3/4] sm:aspect-video max-w-4xl mx-auto select-none rounded-2xl overflow-hidden border border-white/10"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseUp}
             onTouchMove={handleTouchMove}
@@ -78,11 +78,11 @@ export function ImageComparison({
                 <img src={beforeImage} alt={altBefore} className="h-full w-full object-cover object-left" draggable={false} />
 
                 {itemsBefore && itemsBefore.length > 0 && (
-                    <div className="absolute inset-y-0 left-0 w-1/2 px-3 flex flex-col items-center justify-center text-center gap-3 pointer-events-none">
+                    <div className="absolute inset-y-0 left-0 w-1/2 px-2 sm:px-3 flex flex-col items-center justify-center text-center gap-1.5 sm:gap-3 pointer-events-none">
                         {itemsBefore.map((item) => (
                             <span
                                 key={item}
-                                className="text-sm sm:text-base leading-snug text-gray-200 line-through whitespace-nowrap"
+                                className="text-[11px] sm:text-base leading-tight sm:leading-snug text-gray-200 line-through sm:whitespace-nowrap"
                                 style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6)' }}
                             >
                                 {item}
@@ -102,11 +102,11 @@ export function ImageComparison({
                 <img src={afterImage} alt={altAfter} className="h-full w-full object-cover object-left" draggable={false} />
 
                 {itemsAfter && itemsAfter.length > 0 && (
-                    <div className="absolute inset-y-0 right-0 w-1/2 px-3 flex flex-col items-center justify-center text-center gap-3 pointer-events-none">
+                    <div className="absolute inset-y-0 right-0 w-1/2 px-2 sm:px-3 flex flex-col items-center justify-center text-center gap-1.5 sm:gap-3 pointer-events-none">
                         {itemsAfter.map((item) => (
                             <span
                                 key={item}
-                                className="text-sm sm:text-base leading-snug text-white font-semibold whitespace-nowrap"
+                                className="text-[11px] sm:text-base leading-tight sm:leading-snug text-white font-semibold sm:whitespace-nowrap"
                                 style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.6)' }}
                             >
                                 {item}
