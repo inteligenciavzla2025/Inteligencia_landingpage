@@ -4,28 +4,30 @@ import { useChatContext } from '../../context/ChatContext';
 import {
     CTA_ID_CUADRANTE,
     CTA_LABEL_CUADRANTE,
-    MENSAJE_CHAT_CUADRANTE,
-    MENSAJE_CHAT_SECUNDARIO,
+    construirMensajeChatCuadrante,
+    construirMensajeChatSecundario,
 } from '../../data/diagnostico/diagnosticosCuadrante';
 import type { DiagnosticoResultado } from '../../lib/diagnostico/types';
+import type { DiagnosticoContacto } from '../../types/diagnostico';
 
 interface SiguientePasoProps {
     resultado: DiagnosticoResultado;
+    contacto: DiagnosticoContacto | null;
 }
 
 const LOCATION = 'resultado_panel';
 
-export function SiguientePaso({ resultado }: SiguientePasoProps) {
+export function SiguientePaso({ resultado, contacto }: SiguientePasoProps) {
     const { openChat } = useChatContext();
 
     function handlePrimario() {
         trackCtaClick(CTA_ID_CUADRANTE[resultado.cuadrante], LOCATION);
-        openChat(CTA_ID_CUADRANTE[resultado.cuadrante], MENSAJE_CHAT_CUADRANTE[resultado.cuadrante]);
+        openChat(CTA_ID_CUADRANTE[resultado.cuadrante], construirMensajeChatCuadrante(contacto, resultado));
     }
 
     function handleSecundario() {
         trackCtaClick('resultado_hablar_ahora', LOCATION);
-        openChat('resultado_hablar_ahora', MENSAJE_CHAT_SECUNDARIO);
+        openChat('resultado_hablar_ahora', construirMensajeChatSecundario(contacto, resultado));
     }
 
     return (

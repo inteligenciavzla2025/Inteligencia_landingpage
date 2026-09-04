@@ -32,7 +32,7 @@ const SEGMENTOS_ALIENTO: SegmentoAliento[] = [
 ];
 
 export function useQuizFlow() {
-    const { state, setAnswer, setStep, setResultado, resetState } = useDiagnosticoState();
+    const { state, setAnswer, setStep, setResultado, setContacto, resetState } = useDiagnosticoState();
 
     // Clamp defensivo por si currentStep persistido queda fuera de rango.
     const currentStep = Math.min(Math.max(state.currentStep, 0), PASOS_QUIZ.length - 1);
@@ -79,6 +79,6 @@ export function useQuizFlow() {
 
     return {
         paso, currentStep, progresoPct, textoAliento, respuestaActual,
-        next, back, answerCurrent, state, setResultado, resetState,
+        next, back, answerCurrent, state, setResultado, setContacto, resetState,
     };
 }

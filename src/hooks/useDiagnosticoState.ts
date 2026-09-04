@@ -5,6 +5,7 @@ import {
     createEmptyDiagnosticoState,
     type DiagnosticoState,
     type DiagnosticoAnswer,
+    type DiagnosticoContacto,
 } from '../types/diagnostico';
 import type { DiagnosticoResultado } from '../lib/diagnostico/types';
 
@@ -50,10 +51,18 @@ export function useDiagnosticoState() {
         });
     }, []);
 
+    const setContacto = useCallback((contacto: DiagnosticoContacto) => {
+        setState((prev) => {
+            const next: DiagnosticoState = { ...prev, contacto, updatedAt: new Date().toISOString() };
+            writeJSON(STORAGE_KEY, next);
+            return next;
+        });
+    }, []);
+
     const resetState = useCallback(() => {
         setState(createEmptyDiagnosticoState());
         removeKey(STORAGE_KEY);
     }, []);
 
-    return { state, setAnswer, setStep, setResultado, resetState };
+    return { state, setAnswer, setStep, setResultado, setContacto, resetState };
 }

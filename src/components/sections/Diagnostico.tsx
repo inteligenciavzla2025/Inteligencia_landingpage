@@ -26,7 +26,7 @@ import { RESULTADOS_EJEMPLO_POR_CUADRANTE } from '../../data/diagnostico/resulta
 export function Diagnostico() {
     const {
         paso, currentStep, progresoPct, textoAliento, respuestaActual,
-        next, back, answerCurrent, state, setResultado, resetState,
+        next, back, answerCurrent, state, setResultado, setContacto, resetState,
     } = useQuizFlow();
 
     // La sección se carga lazy (ver Landing.tsx), así que cuando el navegador
@@ -46,6 +46,7 @@ export function Diagnostico() {
             metadata: { sector: datosContacto.sector, empleados: datosContacto.rangoEmpleados },
         });
         setResultado(resultado);
+        setContacto(datosContacto);
         // Fire-and-forget: no se espera esta promesa, no bloquea que se muestre el resultado.
         enviarDiagnostico({
             contacto: datosContacto,
@@ -53,7 +54,7 @@ export function Diagnostico() {
             resultado,
             meta: construirMetaDiagnostico(),
         });
-    }, [state.answers, setResultado]);
+    }, [state.answers, setResultado, setContacto]);
 
     return (
         <section id="contact" className="py-24 relative overflow-hidden">
@@ -66,7 +67,7 @@ export function Diagnostico() {
                         <BotonImagenCompartible resultado={state.resultado} />
                         <RevelaScroll><RadarMadurez resultado={state.resultado} /></RevelaScroll>
                         <RevelaScroll><DispersionProcesos resultado={state.resultado} /></RevelaScroll>
-                        <RevelaScroll><SiguientePaso resultado={state.resultado} /></RevelaScroll>
+                        <RevelaScroll><SiguientePaso resultado={state.resultado} contacto={state.contacto} /></RevelaScroll>
                         <div className="text-center pt-2">
                             <Button type="button" variant="ghost" size="sm" onClick={resetState}>
                                 Repetir el diagnóstico
