@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activación IA | InteligencIA</title>
+<link rel="icon" type="image/png" href="/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#020202; --surface:#141416; --surface-2:#232326; --line:rgba(255,255,255,.1);
+  --glass:rgba(255,255,255,.05); --text:#e5e7eb; --muted:#9ca3af; --dim:#6b7280;
+  --orange:#ff6b00; --blue:#007bff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.display{font-family:Montserrat,sans-serif;font-weight:700;line-height:1.12;letter-spacing:-.02em}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+section{padding:72px 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);font-weight:600;margin-bottom:14px}
+h2{font-size:clamp(26px,4vw,36px);margin-bottom:14px}
+.lead{color:var(--muted);max-width:62ch;font-size:17px}
+
+/* hero */
+.hero{padding:88px 0 64px}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 15px;margin-bottom:26px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--orange)}
+.hero h1{font-size:clamp(38px,7vw,66px);font-weight:800;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero p{color:var(--muted);font-size:19px;max-width:60ch}
+.facts{display:flex;flex-wrap:wrap;gap:0;margin-top:44px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--glass);backdrop-filter:blur(24px)}
+.fact{flex:1 1 150px;padding:20px 22px;border-right:1px solid var(--line)}
+.fact:last-child{border-right:0}
+.fact b{display:block;font-family:Montserrat,sans-serif;font-size:22px;color:#fff;margin-bottom:2px}
+.fact span{font-size:13px;color:var(--dim)}
+
+/* track */
+.track{margin-top:36px;display:grid;gap:14px}
+.mod{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;display:grid;grid-template-columns:74px 1fr}
+.mod-n{background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-size:24px;font-weight:800;color:var(--orange);border-right:1px solid var(--line)}
+.mod-b{padding:22px 24px}
+.mod h3{font-size:19px;margin-bottom:4px}
+.mod .when{font-size:12px;color:var(--dim);margin-bottom:10px}
+.mod p{color:var(--muted);font-size:15px;margin-bottom:12px}
+.out{font-size:14px;color:var(--text);border-left:2px solid var(--orange);padding-left:12px}
+.out b{color:var(--orange);font-weight:600}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.card{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--glass);backdrop-filter:blur(24px)}
+.card h3{font-size:17px;margin-bottom:12px}
+ul{list-style:none;display:grid;gap:9px}
+li{position:relative;padding-left:20px;color:var(--muted);font-size:15px}
+li:before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:2px;background:var(--orange)}
+.card.no li:before{background:var(--dim)}
+
+table{width:100%;border-collapse:collapse;margin-top:28px;font-size:15px}
+th{text-align:left;font-family:Montserrat,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:600;padding:0 14px 12px;border-bottom:1px solid var(--line)}
+td{padding:16px 14px;border-bottom:1px solid var(--line);color:var(--muted);vertical-align:top}
+td:first-child{color:#fff;font-weight:600;white-space:nowrap}
+td b{color:var(--orange);font-weight:600;white-space:nowrap}
+
+.qa{border-top:1px solid var(--line);padding:22px 0}
+.qa h3{font-size:16px;margin-bottom:8px;color:#fff}
+.qa p{color:var(--muted);font-size:15px;max-width:70ch}
+
+.cta{text-align:center;padding:80px 0 96px}
+.cta h2{margin-bottom:12px}
+.cta p{color:var(--muted);max-width:52ch;margin:0 auto 28px}
+.btn{display:inline-block;background:var(--orange);color:#020202;font-weight:700;font-family:Montserrat,sans-serif;font-size:16px;padding:16px 34px;border-radius:10px;text-decoration:none}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.alt{display:block;margin-top:16px;font-size:14px;color:var(--dim);text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 0;font-size:13px;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media(max-width:720px){
+  .grid2{grid-template-columns:1fr}
+  .fact{border-right:0;border-bottom:1px solid var(--line)}
+  .mod{grid-template-columns:1fr}
+  .mod-n{justify-content:flex-start;padding:12px 24px;border-right:0;border-bottom:1px solid var(--line)}
+  table,thead,tbody,th,td,tr{display:block}
+  thead{display:none}
+  td{border:0;padding:3px 0}
+  tr{border-bottom:1px solid var(--line);padding:16px 0;display:block}
+  td:first-child{margin-bottom:6px}
+}
+@media print{body{background:#fff;color:#111}.card,.mod,.facts{background:none}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="kicker"><span class="dot"></span> Escalón 02 · Formación aplicada</span>
+    <h1>Activación <em>IA</em></h1>
+    <p>Cuatro semanas para que tu equipo deje de mirar la inteligencia artificial desde afuera y empiece a usarla en el trabajo que ya hace todos los días.</p>
+    <div class="facts">
+      <div class="fact"><b>4 semanas</b><span>12 h en vivo</span></div>
+      <div class="fact"><b>Por sector</b><span>casos de tu rubro</span></div>
+      <div class="fact"><b>Hasta 15</b><span>personas por equipo</span></div>
+      <div class="fact"><b>$1.400–3.500</b><span>USD por equipo</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Qué resuelve</p>
+    <h2>El problema no es la herramienta</h2>
+    <p class="lead">Tu equipo ya probó ChatGPT. Alguno lo usa a escondidas. Nadie sabe para qué sirve realmente en el trabajo de esta empresa, ni qué información se puede meter ahí, ni cómo pasar de una respuesta suelta a algo que funcione solo. Eso es lo que resuelven estas cuatro semanas.</p>
+    <div class="grid2">
+      <div class="card">
+        <h3>Para quién es</h3>
+        <ul>
+          <li>Equipos de 5 a 15 personas con trabajo administrativo o de atención repetitivo</li>
+          <li>Empresas que quieren entender qué es posible antes de invertir en un proyecto</li>
+          <li>Operaciones que todavía no tienen sus datos ordenados</li>
+          <li>Profesionales del sector que quieren aplicarlo a su propio trabajo</li>
+        </ul>
+      </div>
+      <div class="card no">
+        <h3>Para quién no</h3>
+        <ul>
+          <li>Empresas que ya tienen procesos definidos y buscan implementación con integración a sus sistemas</li>
+          <li>Quien espera que al terminar exista un agente operando solo en producción</li>
+          <li>Equipos sin nadie disponible para practicar dos horas semanales</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">El programa</p>
+    <h2>Cuatro semanas, cuatro entregables</h2>
+    <p class="lead">Dos sesiones en vivo por semana de 90 minutos, más un laboratorio práctico entre sesiones. Cada módulo termina con algo construido, no con apuntes.</p>
+
+    <div class="track">
+      <article class="mod">
+        <div class="mod-n">01</div>
+        <div class="mod-b">
+          <h3>Mapa de oportunidades del oficio</h3>
+          <p class="when">Semana 1</p>
+          <p>Qué tarea conviene automatizar y cuál no. Criterios de repetición, volumen, tolerancia al error y reversibilidad, aplicados a los procesos típicos de tu sector.</p>
+          <p class="out"><b>Te llevas:</b> entre 10 y 15 tareas priorizadas, con las horas mensuales que consume cada una.</p>
+        </div>
+      </article>
+
+      <article class="mod">
+        <div class="mod-n">02</div>
+        <div class="mod-b">
+          <h3>Herramientas y conversación útil</h3>
+          <p class="when">Semana 2</p>
+          <p>Cómo dejar de pedirle cosas a un chat y empezar a dar instrucciones estructuradas que producen el mismo resultado todas las veces. Qué herramienta sirve para qué tarea, y qué información no se sube nunca.</p>
+          <p class="out"><b>Te llevas:</b> tus primeras tres plantillas de trabajo probadas, más la biblioteca de instrucciones de tu sector.</p>
+        </div>
+      </article>
+
+      <article class="mod">
+        <div class="mod-n">03</div>
+        <div class="mod-b">
+          <h3>Tu primer flujo de trabajo</h3>
+          <p class="when">Semana 3</p>
+          <p>El salto de la herramienta suelta al flujo que se dispara solo. Construcción guiada, en vivo, de un flujo real de bajo riesgo con revisión humana antes de que algo salga hacia un cliente.</p>
+          <p class="out"><b>Te llevas:</b> un flujo funcionando en tu entorno, documentado en una página.</p>
+        </div>
+      </article>
+
+      <article class="mod">
+        <div class="mod-n">04</div>
+        <div class="mod-b">
+          <h3>Reglas del juego y ruta propia</h3>
+          <p class="when">Semana 4</p>
+          <p>Qué información se puede usar y quién autoriza. Cómo introducir esto en el equipo sin generar resistencia. Y dónde está la línea entre lo que puedes resolver solo y lo que exige integrar sistemas.</p>
+          <p class="out"><b>Te llevas:</b> tu política de uso de IA en una página y tu ruta de los próximos 6 meses.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Al terminar</p>
+    <h2>Lo que queda en tu empresa</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3>Material</h3>
+        <ul>
+          <li>Playbook de IA de tu sector, con procesos, casos y riesgos del oficio</li>
+          <li>Biblioteca de 60 a 80 instrucciones listas para usar</li>
+          <li>Tres plantillas de flujo documentadas paso a paso</li>
+          <li>Grabaciones y materiales por 12 meses</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Capacidad</h3>
+        <ul>
+          <li>Personas que saben distinguir qué automatizar y qué no tocar</li>
+          <li>Un flujo propio funcionando desde la semana 3</li>
+          <li>Política de uso escrita y adaptada a tu operación</li>
+          <li>Ruta de 6 meses con las siguientes tres oportunidades</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Modalidades</p>
+    <h2>Cómo se contrata</h2>
+    <table>
+      <thead><tr><th>Formato</th><th>Cómo funciona</th><th>Inversión</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>In-company</td>
+          <td>Programa completo para un equipo de una sola empresa, con los casos de tu operación. Hasta 15 personas.</td>
+          <td><b>USD 1.400 – 3.500</b><br>por equipo</td>
+        </tr>
+        <tr>
+          <td>In-company Plus</td>
+          <td>Lo anterior más dos sesiones de acompañamiento después del cierre, para revisar lo que construyeron.</td>
+          <td><b>USD 3.500 – 5.500</b><br>por equipo</td>
+        </tr>
+        <tr>
+          <td>Cohorte abierta</td>
+          <td>Grupo sectorial con participantes de distintas empresas. Fechas fijas, cupo limitado.</td>
+          <td><b>USD 220 – 380</b><br>por persona</td>
+        </tr>
+        <tr>
+          <td>Taller intensivo</td>
+          <td>Cuatro horas sobre un solo módulo. Para probar el formato antes de comprometer al equipo.</td>
+          <td><b>USD 60 – 120</b><br>por persona</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Antes de decidir</p>
+    <h2>Lo que suelen preguntar</h2>
+
+    <div class="qa">
+      <h3>¿Necesitan acceso a nuestros sistemas o a nuestra información?</h3>
+      <p>No. El programa trabaja sobre los casos típicos de tu rubro y sobre material de ejemplo. Cada participante aplica lo aprendido en su propio entorno, con su propia información. No es una inmersión en tu operación, y por eso arranca en días en lugar de semanas.</p>
+    </div>
+
+    <div class="qa">
+      <h3>¿Al terminar tenemos un agente funcionando?</h3>
+      <p>Tienen un flujo funcionando, construido por ustedes, con revisión humana en cada salida. Un agente operando de forma autónoma sobre sus sistemas es otro producto, y en el módulo 4 les mostramos exactamente dónde está esa línea para que puedan decidir con criterio.</p>
+    </div>
+
+    <div class="qa">
+      <h3>¿Nuestro equipo va a poder? No somos técnicos.</h3>
+      <p>El programa está diseñado para gente de operaciones, ventas y administración, no para desarrolladores. Lo único que se necesita es una computadora y disposición a practicar dos horas por semana fuera de las sesiones.</p>
+    </div>
+
+    <div class="qa">
+      <h3>¿Qué pasa si después queremos implementar de verdad?</h3>
+      <p>El 50 % de lo que pagaste se acredita al diagnóstico del programa de implementación si lo contratas dentro de los 90 días siguientes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Primero mide, después decide</h2>
+    <p>Antes de contratar el programa, haz el diagnóstico gratuito. En ocho minutos vas a saber si este es el escalón que te corresponde o si tu empresa está lista para algo más.</p>
+    <a class="btn" href="/#contact">Empezar el diagnóstico</a>
+    <a class="alt" href="mailto:inteligenciavzla2025@gmail.com">¿Prefieres que te contactemos? Escríbenos.</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:10px">
+    <span>InteligencIA · Activación IA</span>
+    <span>Caracas, Venezuela</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -6,9 +6,9 @@ import { Button } from '../ui/Button';
 import { trackCtaClick } from '../../lib/analytics';
 
 const navLinks = [
-    { name: 'Soluciones', href: '#services' },
-    { name: 'Proceso', href: '#process' },
-    { name: 'Nosotros', href: '#about' },
+    { name: 'Productos', href: '#productos' },
+    { name: 'Método', href: '#metodo' },
+    { name: 'Preguntas', href: '#objeciones' },
 ];
 
 export function Navbar() {
@@ -21,7 +21,7 @@ export function Navbar() {
     const [navWidth, setNavWidth] = useState<number | null>(null);
 
     function handleFormClick(location: string) {
-        trackCtaClick('navbar_form', location);
+        trackCtaClick('navbar_diagnostico', location);
         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     }
 
@@ -89,7 +89,7 @@ export function Navbar() {
                         onClick={() => handleFormClick('navbar')}
                         className="rounded-2xl bg-electric-orange/20 hover:bg-electric-orange/30 backdrop-blur-xl border border-electric-orange/40 text-white"
                     >
-                        Agendar diagnóstico
+                        Diagnóstico gratis
                     </Button>
                 </div>
 
@@ -129,7 +129,7 @@ export function Navbar() {
                                     handleFormClick('navbar_mobile');
                                 }}
                             >
-                                Agendar diagnóstico
+                                Diagnóstico gratis
                             </Button>
                         </div>
                     </motion.div>

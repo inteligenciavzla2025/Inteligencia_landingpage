@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operación Aumentada | InteligencIA</title>
+<link rel="icon" type="image/png" href="/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#020202; --surface:#141416; --surface-2:#232326; --line:rgba(255,255,255,.1);
+  --glass:rgba(255,255,255,.05); --text:#e5e7eb; --muted:#9ca3af; --dim:#6b7280;
+  --orange:#ff6b00; --blue:#007bff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Montserrat,sans-serif;font-weight:700;line-height:1.12;letter-spacing:-.02em}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+section{padding:72px 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);font-weight:600;margin-bottom:14px}
+h2{font-size:clamp(26px,4vw,36px);margin-bottom:14px}
+.lead{color:var(--muted);max-width:62ch;font-size:17px}
+
+.hero{padding:88px 0 64px}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 15px;margin-bottom:26px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--orange)}
+.hero h1{font-size:clamp(38px,7vw,64px);font-weight:800;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero p{color:var(--muted);font-size:19px;max-width:60ch}
+.facts{display:flex;flex-wrap:wrap;margin-top:44px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--glass);backdrop-filter:blur(24px)}
+.fact{flex:1 1 150px;padding:20px 22px;border-right:1px solid var(--line)}
+.fact:last-child{border-right:0}
+.fact b{display:block;font-family:Montserrat,sans-serif;font-size:22px;color:#fff;margin-bottom:2px}
+.fact span{font-size:13px;color:var(--dim)}
+
+/* promise */
+.promise{border-left:3px solid var(--orange);padding:6px 0 6px 22px;margin-top:26px;font-size:19px;color:#fff;max-width:60ch;font-family:Montserrat,sans-serif;font-weight:600;line-height:1.35}
+
+/* phases */
+.phases{margin-top:34px;display:grid;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.phase{display:grid;grid-template-columns:88px 1fr 250px;border-bottom:1px solid var(--line)}
+.phase:last-child{border-bottom:0}
+.ph-n{background:var(--surface-2);display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--line);padding:20px 0}
+.ph-n b{font-family:Montserrat,sans-serif;font-size:22px;font-weight:800;color:var(--orange)}
+.ph-b{padding:24px}
+.ph-b h3{font-size:19px;margin-bottom:2px}
+.ph-b .sub{font-size:12px;color:var(--dim);margin-bottom:10px}
+.ph-b p{color:var(--muted);font-size:15px}
+.ph-g{padding:24px;background:var(--surface);border-left:1px solid var(--line)}
+.ph-g span{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:7px}
+.ph-g p{font-size:14px;color:var(--text)}
+
+/* ladder */
+.ladder{margin-top:30px;display:grid;gap:8px}
+.rung{display:grid;grid-template-columns:56px 1fr;align-items:stretch;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.rung .lv{display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-weight:800;font-size:18px;color:#020202;background:var(--orange)}
+.rung .lb{padding:16px 20px}
+.rung h3{font-size:16px;margin-bottom:3px}
+.rung p{font-size:14px;color:var(--muted)}
+.rung:nth-child(1) .lv{background:#4a2a10;color:var(--orange)}
+.rung:nth-child(2) .lv{background:#6b3a12}
+.rung:nth-child(3) .lv{background:#a3540f}
+.rung:nth-child(4) .lv{background:#d96000}
+.rung:nth-child(5) .lv{background:var(--orange)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.card{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--glass);backdrop-filter:blur(24px)}
+.card h3{font-size:17px;margin-bottom:12px}
+ul{list-style:none;display:grid;gap:9px}
+li{position:relative;padding-left:20px;color:var(--muted);font-size:15px}
+li:before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:2px;background:var(--orange)}
+.card.no li:before{background:var(--dim)}
+
+table{width:100%;border-collapse:collapse;margin-top:28px;font-size:15px}
+th{text-align:left;font-family:Montserrat,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:600;padding:0 14px 12px;border-bottom:1px solid var(--line)}
+td{padding:16px 14px;border-bottom:1px solid var(--line);color:var(--muted);vertical-align:top}
+td:first-child{color:#fff;font-weight:600;white-space:nowrap}
+td b{color:var(--orange);font-weight:600;white-space:nowrap}
+
+.qa{border-top:1px solid var(--line);padding:22px 0}
+.qa h3{font-size:16px;margin-bottom:8px;color:#fff}
+.qa p{color:var(--muted);font-size:15px;max-width:70ch}
+
+.cta{text-align:center;padding:80px 0 96px}
+.cta p{color:var(--muted);max-width:52ch;margin:0 auto 28px}
+.btn{display:inline-block;background:var(--orange);color:#020202;font-weight:700;font-family:Montserrat,sans-serif;font-size:16px;padding:16px 34px;border-radius:10px;text-decoration:none}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.alt{display:block;margin-top:16px;font-size:14px;color:var(--dim);text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 0;font-size:13px;color:var(--dim)}
+
+@media(max-width:820px){
+  .phase{grid-template-columns:1fr}
+  .ph-n{flex-direction:row;gap:10px;justify-content:flex-start;padding:12px 24px;border-right:0;border-bottom:1px solid var(--line)}
+  .ph-g{border-left:0;border-top:1px solid var(--line)}
+  .grid2{grid-template-columns:1fr}
+  .fact{border-right:0;border-bottom:1px solid var(--line)}
+  table,thead,tbody,th,td,tr{display:block}
+  thead{display:none}
+  td{border:0;padding:3px 0}
+  tr{border-bottom:1px solid var(--line);padding:16px 0;display:block}
+  td:first-child{margin-bottom:6px}
+}
+@media print{body{background:#fff;color:#111}.card,.phase,.facts,.rung{background:none}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="kicker"><span class="dot"></span> Escalón 03 · Implementación</span>
+    <h1>Operación <em>Aumentada</em></h1>
+    <p>Noventa días para que un proceso crítico de tu empresa deje de depender de horas-hombre, con tu equipo supervisando y con números que puedes verificar.</p>
+    <div class="facts">
+      <div class="fact"><b>90 días</b><span>un proceso en producción</span></div>
+      <div class="fact"><b>5 fases</b><span>con puerta de control</span></div>
+      <div class="fact"><b>2 semanas</b><span>en paralelo antes de salir</span></div>
+      <div class="fact"><b>100 %</b><span>supervisión humana al inicio</span></div>
+    </div>
+    <p class="promise">No ponemos nada frente a tus clientes hasta que el sistema demuestre su tasa de acierto sobre tus propios casos.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Cómo trabajamos</p>
+    <h2>Cinco fases, cinco puertas</h2>
+    <p class="lead">No se avanza a la fase siguiente sin cumplir criterios numéricos acordados por escrito. Si el sistema no llega al umbral, no sale a producción. Esa es la diferencia entre un proyecto de automatización y una demostración.</p>
+
+    <div class="phases">
+      <article class="phase">
+        <div class="ph-n"><b>01</b></div>
+        <div class="ph-b">
+          <h3>Percepción</h3>
+          <p class="sub">Diagnóstico · Semanas 1–2</p>
+          <p>Medimos tu operación con datos reales, no con supuestos. Entrevistamos a quien ejecuta el proceso, no solo a quien lo dirige, y elegimos juntos un único proceso para el piloto.</p>
+        </div>
+        <div class="ph-g"><span>Puerta</span><p>Retorno proyectado con recuperación de la inversión en menos de seis meses, en escenario conservador.</p></div>
+      </article>
+
+      <article class="phase">
+        <div class="ph-n"><b>02</b></div>
+        <div class="ph-b">
+          <h3>Sinapsis</h3>
+          <p class="sub">Diseño · Semanas 3–4</p>
+          <p>Rediseñamos el proceso antes de automatizarlo. Definimos qué decide la máquina, qué decide tu equipo y qué está prohibido. Automatizar un proceso malo solo produce un proceso malo más rápido.</p>
+        </div>
+        <div class="ph-g"><span>Puerta</span><p>Criterios de aceptación firmados con números explícitos de precisión, escalamiento y tiempo de respuesta.</p></div>
+      </article>
+
+      <article class="phase">
+        <div class="ph-n"><b>03</b></div>
+        <div class="ph-b">
+          <h3>Espejo</h3>
+          <p class="sub">Piloto en paralelo · Semanas 5–8</p>
+          <p>El sistema procesa tus casos reales del día al mismo tiempo que tu equipo, sin hablar con ningún cliente tuyo. Comparamos las dos respuestas durante dos semanas y revisamos cada diferencia contigo.</p>
+        </div>
+        <div class="ph-g"><span>Puerta</span><p>Precisión sobre tus propios casos por encima del umbral acordado, y cero incidentes con información sensible.</p></div>
+      </article>
+
+      <article class="phase">
+        <div class="ph-n"><b>04</b></div>
+        <div class="ph-b">
+          <h3>Reflejo</h3>
+          <p class="sub">Producción supervisada · Semanas 9–11</p>
+          <p>Sale en vivo por etapas: un canal, un segmento, un horario. Nunca todo el volumen el primer día. Tu equipo aprueba el 100 % de las acciones al principio, y el sistema gana autonomía por niveles.</p>
+        </div>
+        <div class="ph-g"><span>Puerta</span><p>Tres semanas de operación estable y mejora medible frente al punto de partida de la fase 01.</p></div>
+      </article>
+
+      <article class="phase">
+        <div class="ph-n"><b>05</b></div>
+        <div class="ph-b">
+          <h3>Consolidación</h3>
+          <p class="sub">Transferencia · Semana 12</p>
+          <p>Certificamos a tus operadores con una evaluación práctica y te entregamos el sistema, la documentación, el plan de reversión y las credenciales. Sin dependencia diaria de nosotros.</p>
+        </div>
+        <div class="ph-g"><span>Puerta</span><p>Operadores aprobados en la evaluación práctica y acta de entrega firmada.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Control</p>
+    <h2>La autonomía se gana, no se asume</h2>
+    <p class="lead">El sistema no arranca decidiendo solo. Sube de nivel cuando cumple criterios medidos, y baja si los deja de cumplir. Tú decides hasta dónde llega.</p>
+
+    <div class="ladder">
+      <article class="rung"><div class="lv">0</div><div class="lb"><h3>Sombra</h3><p>Propone en paralelo. No publica nada. Tu equipo trabaja como siempre.</p></div></article>
+      <article class="rung"><div class="lv">1</div><div class="lb"><h3>Copiloto</h3><p>Redacta y deja lista la acción. Una persona revisa y aprueba el 100 %.</p></div></article>
+      <article class="rung"><div class="lv">2</div><div class="lb"><h3>Autonomía condicionada</h3><p>Ejecuta los casos de baja criticidad. Tu equipo aprueba las excepciones y los montos altos.</p></div></article>
+      <article class="rung"><div class="lv">3</div><div class="lb"><h3>Autonomía con muestreo</h3><p>Ejecuta el flujo completo. Se audita una muestra del 10 % y todas las alertas.</p></div></article>
+      <article class="rung"><div class="lv">4</div><div class="lb"><h3>Supervisión por excepción</h3><p>Opera y se autoevalúa. Solo se revisan alertas y el reporte semanal. Reservado para tareas de bajo riesgo.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Al terminar</p>
+    <h2>Lo que queda en tu empresa</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3>El sistema</h3>
+        <ul>
+          <li>El proceso operando en la infraestructura acordada, con credenciales entregadas</li>
+          <li>Tablero con volumen, precisión, escalamiento, tiempo de respuesta y costo por transacción</li>
+          <li>Plan de reversión probado, no solo escrito</li>
+          <li>Registro auditable de cada decisión que tomó el sistema</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>La documentación</h3>
+        <ul>
+          <li>Manual del operador humano: qué revisar, cómo aprobar, cuándo escalar</li>
+          <li>Runbook de incidentes con árbol de decisión</li>
+          <li>Política de uso de IA y matriz de clasificación de datos</li>
+          <li>Informe de resultados contra el punto de partida y ruta de 12 meses</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Inversión</p>
+    <h2>Cómo se estructura</h2>
+    <table>
+      <thead><tr><th>Componente</th><th>Qué cubre</th><th>Rango</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Auditoría</td>
+          <td>Diagnóstico con datos reales, medición del punto de partida y caso de negocio. Se acredita completa si contratas el programa.</td>
+          <td><b>USD 750 – 1.800</b></td>
+        </tr>
+        <tr>
+          <td>Implementación</td>
+          <td>Las cinco fases completas para un proceso. El rango depende de cuántos sistemas hay que integrar y de la sensibilidad de los datos.</td>
+          <td><b>USD 4.500 – 15.000</b></td>
+        </tr>
+        <tr>
+          <td>Operación mensual</td>
+          <td>Monitoreo, soporte, ajustes, mejora continua y reporte de resultados. Contrato mínimo de seis meses.</td>
+          <td><b>USD 450 – 6.000</b><br>por mes</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="lead" style="margin-top:22px">El pago de la implementación se divide en tres: al inicio, al superar la puerta de la fase 03 y contra el acta de entrega. Si el sistema no pasa la puerta, no avanza el proyecto ni el pago.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Antes de decidir</p>
+    <h2>Lo que suelen preguntar</h2>
+
+    <div class="qa">
+      <h3>La IA inventa cosas. No puedo arriesgar mi marca.</h3>
+      <p>Es la pregunta correcta. Entre el 70 % y el 80 % del flujo no lo decide un modelo: lo deciden reglas fijas que tú defines. Cuando el modelo responde, solo puede hacerlo con base en los documentos de tu empresa y cita de dónde sacó cada dato. Si no encuentra respaldo, no inventa: escala a una persona. Y antes de hablar con un cliente tuyo, corre dos semanas en paralelo para que veas su tasa de acierto sobre tus propios casos.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Nuestra información es confidencial.</h3>
+      <p>Debería serlo. Clasificamos cada tipo de dato en cuatro niveles antes de conectar nada, y tú apruebas qué sale y qué no sale de tu empresa. Los datos restringidos se enmascaran. Operamos bajo contratos que excluyen el uso de tu información para entrenar modelos, y cada consulta queda registrada y es auditable. Para los procesos más sensibles existe la opción de trabajar sobre infraestructura controlada.</p>
+    </div>
+
+    <div class="qa">
+      <h3>¿Qué necesitamos tener para empezar?</h3>
+      <p>Un proceso con volumen repetitivo de al menos 300 casos al mes, información accesible aunque esté en hojas de cálculo, una persona dueña del proceso y alguien con poder de decisión disponible para cuatro sesiones en los 90 días. Si algo de eso falta, te lo decimos en la auditoría y te recomendamos empezar por otro escalón.</p>
+    </div>
+
+    <div class="qa">
+      <h3>¿Vamos a tener que despedir gente?</h3>
+      <p>No es el objetivo ni el argumento con el que vendemos esto. En la mayoría de los casos el retorno está en atender más volumen, responder más rápido y cobrar antes, no en reducir nómina. Las horas que se liberan se reasignan a trabajo que sí requiere criterio humano.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Empieza por medir</h2>
+    <p>El diagnóstico gratuito te dice en ocho minutos si tu operación está lista para este programa, y qué proceso conviene atacar primero.</p>
+    <a class="btn" href="/#contact">Empezar el diagnóstico</a>
+    <a class="alt" href="mailto:inteligenciavzla2025@gmail.com">¿Prefieres que te contactemos? Escríbenos.</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
+    <span>InteligencIA · Operación Aumentada</span>
+    <span>Caracas, Venezuela</span>
+  </div>
+</footer>
+
+</body>
+</html>

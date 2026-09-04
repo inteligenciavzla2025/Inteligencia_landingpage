@@ -30,7 +30,11 @@ export function Hero() {
     }
 
     function handleFormLinkClick() {
-        trackCtaClick('hero_form', 'hero');
+        // Sin rutas separadas: "navegar a /diagnostico" (como pedía la
+        // auditoría) se traduce acá en desplazarse a la sección que ya
+        // contiene el diagnóstico embebido, con el cta_id que sí adoptamos
+        // de la auditoría para mantener la nomenclatura de analítica.
+        trackCtaClick('hero_diagnostico', 'hero');
         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     }
 

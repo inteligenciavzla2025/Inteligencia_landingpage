@@ -1,77 +1,44 @@
 import { motion } from 'framer-motion';
-import { XCircle, CheckCircle, ArrowRight } from 'lucide-react';
-import { GlassCard } from '../ui/GlassCard';
+import { ImageComparison } from '../ui/ImageComparison';
+import { ANTETITULO_COMPARATIVA, TITULO_COMPARATIVA, TRANSFORMACIONES } from '../../data/landing/comparativa';
+
+const IMAGEN_DIA_0 = '/imagen_dia_0.jpg';
+const IMAGEN_DIA_90 = '/imagen_dia_90.jpg';
 
 export function Bridge() {
     return (
         <section className="py-24 relative">
             <div className="container mx-auto px-6">
-                <div className="grid md:grid-cols-2 gap-20 items-stretch max-w-4xl mx-auto relative">
-                    {/* Before State */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="order-2 md:order-1 h-full"
-                    >
-                        <GlassCard className="h-full border-red-500/20 bg-red-500/5 relative overflow-hidden">
-                            <h3 className="text-2xl font-bold mb-6 text-red-100 flex items-center gap-3">
-                                <XCircle className="text-red-500" />
-                                El caos actual
-                            </h3>
-                            <ul className="space-y-4">
-                                {[
-                                    "Procesos manuales lentos y propensos a error",
-                                    "Leads perdidos por falta de seguimiento inmediato",
-                                    "Sistemas desconectados que duplican trabajo",
-                                    "Equipo saturado en tareas operativas básicas"
-                                ].map((item, i) => (
-                                    <li key={i} className="flex items-start gap-3 text-red-200/70">
-                                        <span className="mt-1 w-1.5 h-1.5 rounded-full bg-red-500/50" />
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </GlassCard>
-                    </motion.div>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-4"
+                >
+                    <span className="text-electric-orange font-medium tracking-wide border-b border-electric-orange/30 pb-1">{ANTETITULO_COMPARATIVA}</span>
+                    <h2 className="text-4xl md:text-5xl font-bold mt-6">{TITULO_COMPARATIVA}</h2>
+                    <p className="text-gray-400 mt-3 text-sm">Arrastra para ver la diferencia</p>
+                </motion.div>
 
-                    {/* Transformation Arrow (Mobile only, or center layout for desktop if redesigned) */}
-                    <div className="hidden md:flex justify-center order-1 md:order-2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-                        <div className="w-12 h-12 rounded-full bg-black border border-white/20 flex items-center justify-center">
-                            <ArrowRight className="text-white" />
-                        </div>
-                    </div>
-
-                    {/* After State */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="order-1 md:order-3 h-full"
-                    >
-                        <GlassCard className="h-full border-electric-orange/30 bg-electric-orange/5 relative overflow-hidden">
-                            <h3 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
-                                <CheckCircle className="text-electric-orange" />
-                                Modo InteligencIA
-                            </h3>
-                            <ul className="space-y-4">
-                                {[
-                                    "Automatización end-to-end de flujos de trabajo",
-                                    "Respuesta instantánea 24/7 a cada oportunidad",
-                                    "Ecosistema de datos unificado y en tiempo real",
-                                    "Equipo enfocado en estrategia y creatividad"
-                                ].map((item, i) => (
-                                    <li key={i} className="flex items-start gap-3 text-gray-300">
-                                        <span className="mt-1 w-1.5 h-1.5 rounded-full bg-electric-orange" />
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </GlassCard>
-                    </motion.div>
-                </div>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="mt-10"
+                >
+                    <ImageComparison
+                        beforeImage={IMAGEN_DIA_0}
+                        afterImage={IMAGEN_DIA_90}
+                        altBefore="Operación antes de automatizar: procesos manuales, desconectados y sin orden"
+                        altAfter="Operación después de 90 días con InteligencIA: flujo automatizado y conectado"
+                        labelBefore="Día 0"
+                        labelAfter="Día 90"
+                        itemsBefore={TRANSFORMACIONES.map((t) => t.antes)}
+                        itemsAfter={TRANSFORMACIONES.map((t) => t.despues)}
+                    />
+                </motion.div>
             </div>
         </section>
     );
