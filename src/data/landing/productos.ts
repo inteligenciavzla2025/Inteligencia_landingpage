@@ -20,7 +20,7 @@ export const PRODUCTOS_ESCALERA: ProductoEscalera[] = [
         numero: '01',
         nombre: 'Radar de Madurez',
         meta: 'Gratis · 8 minutos',
-        descripcion: 'Responde 24 preguntas y descubre en pantalla qué tan preparada está tu operación, cuántas horas al mes estás perdiendo y qué tres procesos deberías atacar primero.',
+        descripcion: 'Responde 24 preguntas y descubre en pantalla tu nivel de madurez, dónde está tu punto más débil y qué tres procesos deberías atacar primero. El cálculo de horas y dinero recuperable lo revisamos contigo en la llamada.',
         boton: 'Hacer el diagnóstico',
         ctaId: 'productos_radar',
         accion: 'diagnostico',

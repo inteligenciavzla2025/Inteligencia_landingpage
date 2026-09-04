@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { GlassCard } from '../ui/GlassCard';
 import { Button } from '../ui/Button';
@@ -28,6 +28,16 @@ export function Diagnostico() {
         paso, currentStep, progresoPct, textoAliento, respuestaActual,
         next, back, answerCurrent, state, setResultado, resetState,
     } = useQuizFlow();
+
+    // La sección se carga lazy (ver Landing.tsx), así que cuando el navegador
+    // procesa el hash de la URL al cargar la página, este elemento todavía
+    // no existe en el DOM y el scroll nativo no ocurre. Lo hacemos a mano
+    // apenas el componente monta.
+    useEffect(() => {
+        if (window.location.hash === '#contact') {
+            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, []);
 
     const handleSubmitContacto = useCallback((datosContacto: DatosContacto) => {
         const respuestas = mapearRespuestas(state.answers);
