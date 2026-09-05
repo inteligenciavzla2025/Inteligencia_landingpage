@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUp, MessageCircle, Settings, Building2, LineChart } from 'lucide-react';
+import { ArrowUp, MessageCircle, Layers, Building2, Rocket } from 'lucide-react';
 import { useChatContext } from '../../context/ChatContext';
 import { trackCtaClick } from '../../lib/analytics';
 
 const QUICK_ACTIONS = [
-    { icon: MessageCircle, label: 'Automatizar WhatsApp', prompt: 'Quiero automatizar la atención de WhatsApp de mi negocio' },
-    { icon: Settings, label: 'Automatizar procesos', prompt: '¿Cómo automatizan procesos con n8n o Make?' },
+    { icon: MessageCircle, label: 'Hacer el diagnóstico', prompt: 'Quiero hacer el diagnóstico gratuito de 8 minutos' },
+    { icon: Layers, label: 'Activación IA', prompt: '¿Qué incluye Activación IA, el programa de 4 semanas?' },
+    { icon: Rocket, label: 'Operación Aumentada', prompt: '¿Qué incluye Operación Aumentada, la implementación de 90 días?' },
     { icon: Building2, label: '¿Es para mi pyme?', prompt: 'Tengo una pyme, ¿esto es para mí?' },
-    { icon: LineChart, label: 'Ver resultados', prompt: '¿Qué resultados generan para otros clientes?' },
 ];
 
 export function Hero() {

@@ -13,7 +13,7 @@ interface Message {
 const WELCOME_MESSAGE: Message = {
     id: 'welcome',
     role: 'assistant',
-    content: '¡Hola! Soy CEREBRO, el asistente de InteligencIA 🧠 ¿En qué puedo ayudarte hoy? Puedo contarte sobre nuestros servicios de automatización, desarrollo de software con IA, o resolver cualquier duda sobre cómo podemos escalar tu negocio.',
+    content: '¡Hola! Soy CEREBRO, el asistente de InteligencIA 🧠 Puedo contarte sobre el Radar de Madurez (diagnóstico gratuito), Activación IA u Operación Aumentada, o resolver cualquier duda sobre cómo automatizar tu negocio. ¿En qué te puedo ayudar?',
 };
 
 function getSessionId(): string {
