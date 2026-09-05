@@ -20,7 +20,7 @@ export function Footer() {
             <div className="container mx-auto px-6">
                 <div className="grid md:grid-cols-4 gap-12 mb-16">
                     <div className="md:col-span-2">
-                        <a href="#" className="text-2xl font-bold tracking-tight text-white mb-6 block">
+                        <a href="#hero" className="text-2xl font-bold tracking-tight text-white mb-6 block">
                             Inteligenc<span className="text-electric-orange">IA</span>
                         </a>
                         <p className="text-gray-300 max-w-sm mb-8">
@@ -38,10 +38,9 @@ export function Footer() {
                     <div>
                         <h4 className="font-bold text-white mb-6">Soluciones</h4>
                         <ul className="space-y-4 text-gray-300">
-                            <li><a href="#" className="hover:text-electric-orange transition-colors">Automatización de procesos</a></li>
-                            <li><a href="#" className="hover:text-electric-orange transition-colors">Software a medida</a></li>
-                            <li><a href="#" className="hover:text-electric-orange transition-colors">Bots con IA</a></li>
-                            <li><a href="#" className="hover:text-electric-orange transition-colors">Consultoría estratégica</a></li>
+                            <li><a href="#contact" className="hover:text-electric-orange transition-colors">Radar de Madurez</a></li>
+                            <li><a href="/catalogo-activacion-ia.html" className="hover:text-electric-orange transition-colors">Activación IA</a></li>
+                            <li><a href="/catalogo-operacion-aumentada.html" className="hover:text-electric-orange transition-colors">Operación Aumentada</a></li>
                         </ul>
                     </div>
 
@@ -60,8 +59,8 @@ export function Footer() {
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
                     <p>&copy; {new Date().getFullYear()} InteligencIA. Todos los derechos reservados.</p>
                     <div className="flex gap-8">
-                        <a href="#" className="hover:text-white transition-colors">Privacidad</a>
-                        <a href="#" className="hover:text-white transition-colors">Términos</a>
+                        <a href="/privacidad.html" className="hover:text-white transition-colors">Privacidad</a>
+                        <a href="/terminos.html" className="hover:text-white transition-colors">Términos</a>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { BLOQUES } from '../data/diagnostico/bloques';
 import { PREGUNTAS } from '../data/diagnostico/preguntas';
 import type { PasoQuiz } from '../data/diagnostico/tipos';
 import type { DiagnosticoAnswer } from '../types/diagnostico';
+import { trackDiagnosticoIniciado, trackDiagnosticoProgreso } from '../lib/analytics';
 
 // Construido una sola vez, de forma pura: 7 transición + 24 pregunta + 1 contacto = 32 pasos.
 const PASOS_TRANSICION_Y_PREGUNTAS: PasoQuiz[] = BLOQUES.flatMap((bloque): PasoQuiz[] => [
@@ -74,8 +75,10 @@ export function useQuizFlow() {
 
     const answerCurrent = useCallback((value: DiagnosticoAnswer['value']) => {
         if (paso.tipo !== 'pregunta') return;
+        if (state.answers.length === 0) trackDiagnosticoIniciado();
+        trackDiagnosticoProgreso(indiceDePreguntaPorId(paso.id) + 1);
         setAnswer({ questionId: paso.id, value });
-    }, [paso, setAnswer]);
+    }, [paso, setAnswer, state.answers.length]);
 
     return {
         paso, currentStep, progresoPct, textoAliento, respuestaActual,

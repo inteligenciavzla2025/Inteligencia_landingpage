@@ -14,3 +14,15 @@ export function trackChatOpen(source: string) {
 export function trackChatMessageSent(messageCount: number) {
     trackEvent('chat_message_sent', { message_count: messageCount });
 }
+
+export function trackDiagnosticoIniciado() {
+    trackEvent('diagnostico_iniciado');
+}
+
+export function trackDiagnosticoProgreso(numeroPregunta: number) {
+    trackEvent('diagnostico_progreso', { numero_pregunta: numeroPregunta });
+}
+
+export function trackDiagnosticoContactoEnviado() {
+    trackEvent('diagnostico_contacto_enviado');
+}

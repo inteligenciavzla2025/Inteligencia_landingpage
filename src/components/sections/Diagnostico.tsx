@@ -15,6 +15,7 @@ import { mapearRespuestas } from '../../lib/diagnostico/respuestasAdapter';
 import { calcularDiagnostico } from '../../lib/diagnostico';
 import type { DiagnosticoResultado } from '../../lib/diagnostico';
 import { enviarDiagnostico, construirMetaDiagnostico } from '../../lib/enviarDiagnostico';
+import { trackDiagnosticoContactoEnviado } from '../../lib/analytics';
 import { RevelaScroll } from '../resultado/RevelaScroll';
 import { Veredicto } from '../resultado/Veredicto';
 import { BotonImagenCompartible } from '../resultado/BotonImagenCompartible';
@@ -47,6 +48,7 @@ export function Diagnostico() {
         });
         setResultado(resultado);
         setContacto(datosContacto);
+        trackDiagnosticoContactoEnviado();
         // Fire-and-forget: no se espera esta promesa, no bloquea que se muestre el resultado.
         enviarDiagnostico({
             contacto: datosContacto,
