@@ -33,10 +33,14 @@ export function Diagnostico() {
     // La sección se carga lazy (ver Landing.tsx), así que cuando el navegador
     // procesa el hash de la URL al cargar la página, este elemento todavía
     // no existe en el DOM y el scroll nativo no ocurre. Lo hacemos a mano
-    // apenas el componente monta.
+    // apenas el componente monta. El hash solo sirve para este salto inicial
+    // (permite compartir un link directo, ej. "inteligencia.live/#contact");
+    // una vez que cumplió su función lo sacamos de la barra de direcciones
+    // con replaceState, que no agrega entradas al historial ni recarga nada.
     useEffect(() => {
         if (window.location.hash === '#contact') {
             document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
         }
     }, []);
 

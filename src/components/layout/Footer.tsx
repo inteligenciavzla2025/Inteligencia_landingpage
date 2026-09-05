@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import { Linkedin, Twitter, Mail, Instagram, Facebook } from 'lucide-react';
 
 const TikTok = ({ size = 20, className = "" }) => (
@@ -15,6 +16,14 @@ const socialLinks = [
 ];
 
 export function Footer() {
+    function handleRadarClick(e: MouseEvent<HTMLAnchorElement>) {
+        // Preferimos no ensuciar la URL con #contact en la navegación interna
+        // (el hash solo importa para el link externo compartible que arranca
+        // el diagnóstico desde fuera del sitio, manejado en Diagnostico.tsx).
+        e.preventDefault();
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
+
     return (
         <footer className="bg-black border-t border-white/10 pt-20 pb-10">
             <div className="container mx-auto px-6">
@@ -38,9 +47,9 @@ export function Footer() {
                     <div>
                         <h4 className="font-bold text-white mb-6">Soluciones</h4>
                         <ul className="space-y-4 text-gray-300">
-                            <li><a href="#contact" className="hover:text-electric-orange transition-colors">Radar de Madurez</a></li>
-                            <li><a href="/catalogo-activacion-ia.html" className="hover:text-electric-orange transition-colors">Activación IA</a></li>
-                            <li><a href="/catalogo-operacion-aumentada.html" className="hover:text-electric-orange transition-colors">Operación Aumentada</a></li>
+                            <li><a href="#contact" onClick={handleRadarClick} className="hover:text-electric-orange transition-colors">Radar de Madurez</a></li>
+                            <li><a href="/activacion-ia" target="_blank" rel="noopener noreferrer" className="hover:text-electric-orange transition-colors">Activación IA</a></li>
+                            <li><a href="/operacion-aumentada" target="_blank" rel="noopener noreferrer" className="hover:text-electric-orange transition-colors">Operación Aumentada</a></li>
                         </ul>
                     </div>
 

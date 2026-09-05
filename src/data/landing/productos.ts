@@ -33,7 +33,7 @@ export const PRODUCTOS_ESCALERA: ProductoEscalera[] = [
         boton: 'Ver el programa',
         ctaId: 'productos_activacion',
         accion: 'catalogo',
-        catalogoUrl: '/catalogo-activacion-ia.html',
+        catalogoUrl: '/activacion-ia',
     },
     {
         numero: '03',
@@ -43,7 +43,7 @@ export const PRODUCTOS_ESCALERA: ProductoEscalera[] = [
         boton: 'Ver el programa',
         ctaId: 'productos_operacion',
         accion: 'catalogo',
-        catalogoUrl: '/catalogo-operacion-aumentada.html',
+        catalogoUrl: '/operacion-aumentada',
         destacado: true,
     },
 ];

@@ -55,6 +55,14 @@ app.post('/api/chat', async (req, res) => {
 // ── Archivos estáticos (build de React) ────────────────────────────────────
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// ── Rutas limpias para los catálogos (sin .html en la URL) ─────────────────
+app.get('/activacion-ia', (_req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'catalogo-activacion-ia.html'));
+});
+app.get('/operacion-aumentada', (_req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'catalogo-operacion-aumentada.html'));
+});
+
 // ── SPA fallback ───────────────────────────────────────────────────────────
 app.get('*', (_req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
